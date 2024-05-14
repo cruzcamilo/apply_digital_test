@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "Apply_Digital_Test"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
+include(":ui")
