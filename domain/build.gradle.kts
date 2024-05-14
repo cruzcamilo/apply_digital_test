@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
-    id ("kotlin-kapt")
-    alias(libs.plugins.daggerHilt)
 }
 
 android {
-    namespace = "com.applydigitaltest.ui"
+    namespace = "com.applydigitaltest.domain"
     compileSdk = 34
 
     defaultConfig {
@@ -32,32 +30,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.10"
-    }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-    implementation(projects.domain)
-    //Hilt
-    implementation (libs.hilt.android)
-    kapt (libs.hilt.compiler)
 
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.boom))
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
-    implementation(libs.material3)
-    debugImplementation(libs.androidx.ui.tooling)
-    implementation(libs.androidx.constraintlayout.compose)
-
-    // Navigation
-    implementation(libs.navigation.compose)
-    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.appcompat)
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
