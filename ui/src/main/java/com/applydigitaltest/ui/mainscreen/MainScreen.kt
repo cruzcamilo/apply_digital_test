@@ -52,6 +52,8 @@ fun MainScreen(
 
 @Composable
 fun ArticleItem(article: Article) {
+    val createdAt = article.getTimeSinceCreated()
+
     Column(modifier = Modifier.padding(top = 16.dp)) {
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Text(text = article.title)
@@ -61,7 +63,7 @@ fun ArticleItem(article: Article) {
             Text(
                 style = MaterialTheme.typography.bodySmall,
                 color = Color.Gray,
-                text = "${article.author} - ${article.createdAt}"
+                text = "${article.author} - $createdAt"
             )
         }
 
