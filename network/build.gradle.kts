@@ -1,12 +1,13 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.devToolsKsp)
     id ("kotlin-kapt")
     alias(libs.plugins.daggerHilt)
 }
 
 android {
-    namespace = "com.applydigitaltest.data"
+    namespace = "com.applydigitaltest.network"
     compileSdk = 34
 
     defaultConfig {
@@ -36,14 +37,19 @@ android {
 
 dependencies {
     implementation(projects.domain)
-    implementation(projects.network)
-
-    implementation (libs.hilt.android)
-    kapt (libs.hilt.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
+
+    // Hilt
+    implementation (libs.hilt.android)
+    kapt (libs.hilt.compiler)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
