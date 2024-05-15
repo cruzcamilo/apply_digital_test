@@ -10,7 +10,7 @@ data class NetworkArticle(
     @field:Json(name = "_highlightResult")
     val highlightResult: HighlightResult?,
     @field:Json(name = "created_at")
-    val createdAt: String?,
+    val createdAt: String,
     @field:Json(name = "story_url")
     val storyUrl: String?
 )

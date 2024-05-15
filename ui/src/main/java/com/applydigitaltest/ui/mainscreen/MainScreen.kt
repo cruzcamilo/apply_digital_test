@@ -58,8 +58,6 @@ fun ArticleItem(
     article: Article,
     onClickArticle: (String) -> Unit
 ) {
-    val createdAt = article.getTimeSinceCreated()
-
     Column(modifier = Modifier
         .padding(top = 16.dp)
         .clickable { onClickArticle(article.url) }
@@ -72,7 +70,7 @@ fun ArticleItem(
             Text(
                 style = MaterialTheme.typography.bodySmall,
                 color = Color.Gray,
-                text = "${article.author} - $createdAt"
+                text = "${article.author} - ${article.createdAt}"
             )
         }
 
@@ -87,16 +85,16 @@ fun ArticleItem(
 @Preview(showBackground = true)
 fun MainScreenPreview() {
     val article = Article(
-        "The iPad Pro Manifesto (2024 Edition)",
-        "kjkjadksj",
-        "2024-05-14T19:14:09Z",
-        ""
+        title = "The iPad Pro Manifesto (2024 Edition)",
+        author = "kjkjadksj",
+        createdAt = "Yesterday",
+        url = ""
     )
     val articleList = listOf(article, article, article)
     val feedUiState = Success(articleList)
 
     MainScreen(
-        feedUiState,
-        {}
+        feedUiState = feedUiState,
+        onClickArticle = {}
     )
 }
