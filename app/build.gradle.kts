@@ -56,6 +56,9 @@ android {
 
 dependencies {
     implementation(projects.ui)
+    implementation(projects.domain)
+    implementation(projects.network)
+    implementation(projects.data)
 
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.boom))
