@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.applydigitaltest"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -65,7 +65,7 @@ dependencies {
     implementation(libs.ui)
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
-    implementation(libs.material3)
+
     implementation(libs.navigation.compose)
     debugImplementation(libs.androidx.ui.tooling)
 
