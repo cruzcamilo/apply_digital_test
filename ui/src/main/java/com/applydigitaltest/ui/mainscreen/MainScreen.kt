@@ -1,6 +1,6 @@
 package com.applydigitaltest.ui.mainscreen
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -24,17 +24,20 @@ import com.applydigitaltest.ui.mainscreen.MainScreenUiState.Success
 
 @Composable
 fun MainScreenRoute(
+    onClickArticle: (String) -> Unit,
     mainScreenViewModel: MainScreenViewModel = hiltViewModel()
 ) {
     val feedUiState by mainScreenViewModel.mainScreenUiState.collectAsStateWithLifecycle()
     MainScreen(
-        feedUiState = feedUiState
+        feedUiState = feedUiState,
+        onClickArticle = onClickArticle
     )
 }
 
 @Composable
 fun MainScreen(
-    feedUiState: MainScreenUiState
+    feedUiState: MainScreenUiState,
+    onClickArticle: (String) -> Unit,
 ) {
     when(feedUiState) {
 
@@ -43,7 +46,7 @@ fun MainScreen(
         is Success -> {
             LazyColumn {
                 items(feedUiState.articles) {
-                    ArticleItem(article = it)
+                    ArticleItem(article = it, onClickArticle = onClickArticle)
                 }
             }
         }
@@ -51,10 +54,16 @@ fun MainScreen(
 }
 
 @Composable
-fun ArticleItem(article: Article) {
+fun ArticleItem(
+    article: Article,
+    onClickArticle: (String) -> Unit
+) {
     val createdAt = article.getTimeSinceCreated()
 
-    Column(modifier = Modifier.padding(top = 16.dp)) {
+    Column(modifier = Modifier
+        .padding(top = 16.dp)
+        .clickable { onClickArticle(article.url) }
+    ) {
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Text(text = article.title)
 
@@ -80,25 +89,14 @@ fun MainScreenPreview() {
     val article = Article(
         "The iPad Pro Manifesto (2024 Edition)",
         "kjkjadksj",
-        "2024-05-14T19:14:09Z"
+        "2024-05-14T19:14:09Z",
+        ""
     )
     val articleList = listOf(article, article, article)
     val feedUiState = Success(articleList)
 
     MainScreen(
-        feedUiState
+        feedUiState,
+        {}
     )
-}
-
-@Composable
-@Preview(showBackground = true)
-fun ArticlePreview() {
-    val article = Article(
-        "The iPad Pro Manifesto (2024 Edition)",
-        "kjkjadksj",
-        "2024-05-14T19:14:09Z"
-    )
-    Box(modifier = Modifier.padding(vertical = 8.dp)){
-        ArticleItem(article)
-    }
 }

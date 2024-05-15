@@ -7,7 +7,8 @@ fun NetworkArticles.toDomain(): List<Article> =
     this.hits.map { Article(
         title = getTitle(it.highlightResult?.storyTitle?.value, it.title) ,
         author = it.author.orEmpty(),
-        createdAt = it.createdAt.orEmpty()
+        createdAt = it.createdAt.orEmpty(),
+        url = it.storyUrl.orEmpty()
     ) }
 
 private fun getTitle(storyTitle: String?, title: String?): String {

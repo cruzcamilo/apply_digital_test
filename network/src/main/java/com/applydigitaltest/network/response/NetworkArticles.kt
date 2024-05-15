@@ -11,6 +11,8 @@ data class NetworkArticle(
     val highlightResult: HighlightResult?,
     @field:Json(name = "created_at")
     val createdAt: String?,
+    @field:Json(name = "story_url")
+    val storyUrl: String?
 )
 
 data class HighlightResult(

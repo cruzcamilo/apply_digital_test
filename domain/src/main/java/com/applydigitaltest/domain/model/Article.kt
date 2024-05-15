@@ -5,9 +5,10 @@ import java.time.LocalDateTime
 import java.time.ZonedDateTime
 
 data class Article(
-    val title: String = "",
+    val title: String,
     val author: String,
     val createdAt: String,
+    val url: String
 ) {
     fun getTimeSinceCreated(): String {
         val now = LocalDateTime.now()
