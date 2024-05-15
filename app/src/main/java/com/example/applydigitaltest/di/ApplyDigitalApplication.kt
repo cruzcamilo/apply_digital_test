@@ -1,4 +1,4 @@
-package com.example.apply_digital_test.di
+package com.example.applydigitaltest.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

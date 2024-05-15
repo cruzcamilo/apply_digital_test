@@ -1,4 +1,4 @@
-package com.example.apply_digital_test.ui.theme
+package com.example.applydigitaltest.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -38,7 +38,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun Apply_Digital_TestTheme(
+fun ApplyDigitalTestTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

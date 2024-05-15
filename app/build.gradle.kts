@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.apply_digital_test"
+    namespace = "com.example.applydigitaltest"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.apply_digital_test"
+        applicationId = "com.example.applydigitaltest"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

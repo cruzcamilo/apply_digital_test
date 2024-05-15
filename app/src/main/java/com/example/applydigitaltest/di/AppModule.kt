@@ -1,4 +1,4 @@
-package com.example.apply_digital_test.di
+package com.example.applydigitaltest.di
 
 import com.applydigitaltest.data.ArticleRepositoryImpl
 import com.applydigitaltest.data.datasource.RemoteDataSource

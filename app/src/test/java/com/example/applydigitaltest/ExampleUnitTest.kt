@@ -1,4 +1,4 @@
-package com.example.apply_digital_test
+package com.example.applydigitaltest
 
 import org.junit.Test
 

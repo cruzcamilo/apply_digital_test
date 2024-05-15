@@ -1,4 +1,4 @@
-package com.example.apply_digital_test.navigation
+package com.example.applydigitaltest.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
