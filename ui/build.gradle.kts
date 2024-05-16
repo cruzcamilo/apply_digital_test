@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation (libs.androidx.material)
 
     debugImplementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.constraintlayout.compose)

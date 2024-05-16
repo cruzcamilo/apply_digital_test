@@ -24,8 +24,9 @@ class MainScreenViewModel @Inject constructor(
         getArticles()
     }
 
-    private fun getArticles() {
+    fun getArticles() {
         viewModelScope.launch {
+            _mainScreenUiState.value = MainScreenUiState.Loading
             fetchAndSaveUseCase.invoke()
             getArticlesUseCase.invoke().collect {
                 _mainScreenUiState.value = MainScreenUiState.Success(it)
