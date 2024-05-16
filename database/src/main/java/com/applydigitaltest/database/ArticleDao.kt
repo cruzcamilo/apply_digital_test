@@ -12,7 +12,7 @@ interface ArticleDao {
     fun getArticles(): Flow<List<ArticleEntity>>
 
     @Insert
-    suspend fun insertAll(entry: List<ArticleEntity>)
+    suspend fun insertAll(entry: List<ArticleEntity>): List<Long>
 
     @Delete
     suspend fun deleteEntry(entry: ArticleEntity)

@@ -37,6 +37,7 @@ android {
 dependencies {
     implementation(projects.domain)
     implementation(projects.network)
+    implementation(projects.database)
 
     implementation (libs.hilt.android)
     kapt (libs.hilt.compiler)

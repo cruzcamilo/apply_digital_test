@@ -5,7 +5,6 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
-
 data class Article(
     val title: String,
     val author: String,
@@ -24,8 +23,6 @@ data class Article(
             val hours = Math.abs(difference.toHours() % 24)
             val minutes = Math.abs(difference.toMinutes() % 60)
 
-            //Todo Remove log
-            println("Days $days Hours $hours Minutes $minutes")
             return if (days == 1L) {
                 "Yesterday"
             } else if(hours in 1..22) {

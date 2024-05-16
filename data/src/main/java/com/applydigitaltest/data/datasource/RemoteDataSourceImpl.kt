@@ -8,10 +8,16 @@ import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(
     private val retrofitProvider: RetrofitProvider,
-    private val ioDispatcher: CoroutineDispatcher
+    private val ioDispatcher: CoroutineDispatcher,
 ): RemoteDataSource {
-    override suspend fun getArticles(): NetworkArticles =
-        withContext(ioDispatcher) {
-            retrofitProvider.service.getArticles()
+    override suspend fun getArticles(): NetworkArticles {
+        return withContext(ioDispatcher) {
+            try {
+                retrofitProvider.service.getArticles()
+            } catch (e: Exception) {
+                println("${e.message}")
+                throw e
+            }
         }
+    }
 }
