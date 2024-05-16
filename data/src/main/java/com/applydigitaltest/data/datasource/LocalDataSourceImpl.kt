@@ -23,6 +23,9 @@ class LocalDataSourceImpl @Inject constructor(
     override fun getArticles(): Flow<List<Article>> =
         articleDao.getArticles().toDomain()
 
+    override suspend fun deleteArticle(article: Article): Int =
+        articleDao.deleteEntry(article.id, true)
+
     override suspend fun deleteAllArticles() {
         withContext(ioDispatcher) {
             articleDao.deleteAllEntries()

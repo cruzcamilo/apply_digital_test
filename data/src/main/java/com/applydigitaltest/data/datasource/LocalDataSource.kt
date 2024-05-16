@@ -7,5 +7,6 @@ import kotlinx.coroutines.flow.Flow
 interface LocalDataSource {
     suspend fun saveArticles(articleList: List<ArticleEntity>): List<Long>
     fun getArticles(): Flow<List<Article>>
+    suspend fun deleteArticle(article: Article): Int
     suspend fun deleteAllArticles()
 }

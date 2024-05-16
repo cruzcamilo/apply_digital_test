@@ -24,6 +24,9 @@ class ArticleRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun deleteArticle(article: Article): Int =
+        localDataSource.deleteArticle(article)
+
     override suspend fun deleteAllArticles() {
         localDataSource.deleteAllArticles()
     }
