@@ -11,6 +11,10 @@ data class NetworkArticle(
     val highlightResult: HighlightResult?,
     @field:Json(name = "created_at")
     val createdAt: String,
+    @field:Json(name = "story_id")
+    val storyId: Long,
+    @field:Json(name = "created_at_i")
+    val createdAtI: Long,
     @field:Json(name = "story_url")
     val storyUrl: String?
 )

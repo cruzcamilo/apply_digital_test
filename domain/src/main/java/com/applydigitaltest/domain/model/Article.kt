@@ -6,9 +6,11 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 
 data class Article(
+    val id: Long,
     val title: String,
     val author: String,
     val createdAt: String,
+    val createdAtI: Long,
     val url: String,
 ) {
     companion object {

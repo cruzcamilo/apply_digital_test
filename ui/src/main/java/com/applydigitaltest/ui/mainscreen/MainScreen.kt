@@ -117,9 +117,11 @@ fun ArticleItem(
 @Preview(showBackground = true)
 fun MainScreenPreview() {
     val article = Article(
+        id = 0L,
         title = "The iPad Pro Manifesto (2024 Edition)",
         author = "kjkjadksj",
         createdAt = "Yesterday",
+        createdAtI = 0L,
         url = "https://www.highcaffeinecontent.com/blog/20240514-The-iPad-Pro-Manifesto-(2024-Edition)"
     )
     val articleList = listOf(article, article, article)

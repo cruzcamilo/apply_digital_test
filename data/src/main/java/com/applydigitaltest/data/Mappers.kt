@@ -17,9 +17,11 @@ fun Flow<List<ArticleEntity>>.toDomain(): Flow<List<Article>> =
 fun NetworkArticles.toArticleEntities(): List<ArticleEntity> {
     return hits.map {
         ArticleEntity(
+            id = it.storyId,
             author = it.author.orEmpty(),
             title = getTitle(it.highlightResult?.storyTitle?.value, it.title),
             createdAt = Article.getTimeSinceCreated(ZonedDateTime.parse(it.createdAt)),
+            createdAtI = it.createdAtI,
             url = it.storyUrl.orEmpty()
         )
     }
@@ -27,18 +29,22 @@ fun NetworkArticles.toArticleEntities(): List<ArticleEntity> {
 
 fun ArticleEntity.toDomain() =
     Article(
+        id = id,
         title = title,
         author = author,
         createdAt = createdAt,
+        createdAtI = createdAtI,
         url = url
     )
 
 fun Article.toData() =
     ArticleEntity(
-        title = this.title,
-        author = this.author,
-        createdAt = this.createdAt,
-        url = this.url
+        id = id,
+        title = title,
+        author = author,
+        createdAt = createdAt,
+        createdAtI = createdAtI,
+        url = url
     )
 
 
