@@ -7,14 +7,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.time.ZonedDateTime
 
-fun NetworkArticles.toDomain(): List<Article> =
-    this.hits.map { Article(
-        title = getTitle(it.highlightResult?.storyTitle?.value, it.title) ,
-        author = it.author.orEmpty(),
-        createdAt = Article.getTimeSinceCreated(ZonedDateTime.parse(it.createdAt)),
-        url = it.storyUrl.orEmpty()
-    ) }
-
 fun Flow<List<ArticleEntity>>.toDomain(): Flow<List<Article>> =
     this.map {
         it.map { articleEntity ->
@@ -32,8 +24,6 @@ fun NetworkArticles.toArticleEntities(): List<ArticleEntity> {
         )
     }
 }
-
-fun List<Article>.toData() = this.map { it.toData() }
 
 fun ArticleEntity.toDomain() =
     Article(
