@@ -1,5 +1,7 @@
 package com.applydigitaltest.ui.mainscreen
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,16 +41,18 @@ fun MainScreenRoute(
     MainScreen(
         feedUiState = feedUiState,
         onClickArticle = onClickArticle,
-        onRefresh = mainScreenViewModel::getArticles
+        onRefresh = mainScreenViewModel::getArticles,
+        removeArticle = mainScreenViewModel::removeArticle
     )
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun MainScreen(
     feedUiState: MainScreenUiState,
     onClickArticle: (String) -> Unit,
-    onRefresh: () -> Unit
+    onRefresh: () -> Unit,
+    removeArticle: (Article) -> Unit
 ) {
     val pullRefreshState = rememberPullRefreshState(
         refreshing = feedUiState is Loading,
@@ -69,8 +73,13 @@ fun MainScreen(
                     .pullRefresh(pullRefreshState)
             ) {
                 LazyColumn {
-                    items(feedUiState.articles) {
-                        ArticleItem(article = it, onClickArticle = onClickArticle)
+                    items(feedUiState.articles) { article ->
+                        SwipeBox(
+                            onDelete = { removeArticle(article) },
+                            modifier = Modifier.animateItemPlacement()
+                        ) {
+                            Article(article = article, onClickArticle = onClickArticle)
+                        }
                     }
                 }
 
@@ -86,15 +95,17 @@ fun MainScreen(
 }
 
 @Composable
-fun ArticleItem(
+fun Article(
     article: Article,
     onClickArticle: (String) -> Unit
 ) {
     Column(modifier = Modifier
-        .padding(top = 16.dp)
+        .background(color = Color.White)
         .clickable { onClickArticle(article.url) }
     ) {
-        Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+        Column(
+            Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
+        ) {
             Text(text = article.title)
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -130,6 +141,7 @@ fun MainScreenPreview() {
     MainScreen(
         feedUiState = feedUiState,
         onClickArticle = {},
-        onRefresh = {}
+        onRefresh = {},
+        removeArticle = {}
     )
 }

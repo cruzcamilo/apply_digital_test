@@ -12,8 +12,7 @@ interface ArticleDao {
     @Query("SELECT * from ArticleEntity WHERE NOT deleted ORDER BY created_at_i DESC")
     fun getArticles(): Flow<List<ArticleEntity>>
 
-//    @Insert
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(entry: List<ArticleEntity>): List<Long>
 
     @Query("UPDATE ArticleEntity SET deleted = :isDeleted WHERE id = :id")

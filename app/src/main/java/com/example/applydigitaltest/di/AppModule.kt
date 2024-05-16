@@ -43,9 +43,8 @@ object AppModule {
     @Provides
     fun provideRemoteDataSource(
         retrofitProvider: RetrofitProvider,
-        ioDispatcher: CoroutineDispatcher
     ): RemoteDataSource =
-        RemoteDataSourceImpl(retrofitProvider, ioDispatcher)
+        RemoteDataSourceImpl(retrofitProvider)
 
     @Singleton
     @Provides
@@ -53,7 +52,7 @@ object AppModule {
         articleDao: ArticleDao,
         ioDispatcher: CoroutineDispatcher
     ): LocalDataSource =
-        LocalDataSourceImpl(articleDao , ioDispatcher)
+        LocalDataSourceImpl(articleDao)
 
     @Singleton
     @Provides
