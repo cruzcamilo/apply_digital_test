@@ -18,14 +18,8 @@ class ArticleRepositoryImpl @Inject constructor(
     override suspend fun fetchAndSave(): Result<List<Long>> {
         return try {
             val articleEntitiesList = remoteDataSource.getArticles()
-            Log.d("ArticleRepository", "Article amount ${articleEntitiesList.size}")
-
-            articleEntitiesList.forEach {
-                Log.d("ArticleRepository", "id ${it.id} name")
-            }
             localDataSource.deleteAllArticles()
             val idList = localDataSource.saveArticles(articleEntitiesList)
-            Log.d("ArticleRepository", "idList size ${idList.size}")
             Result.success(idList)
         } catch (e: Exception) {
             Log.e("ArticleRepository", "${e.message}")

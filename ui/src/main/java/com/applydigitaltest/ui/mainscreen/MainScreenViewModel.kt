@@ -1,6 +1,5 @@
 package com.applydigitaltest.ui.mainscreen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.applydigitaltest.domain.model.Article
@@ -37,7 +36,6 @@ class MainScreenViewModel @Inject constructor(
                 articleList.clear()
                 articleList.addAll(it)
                 _mainScreenUiState.value = MainScreenUiState.Success(articleList)
-                Log.d(MainScreenViewModel::class.java.name, "Articles size ${articleList.size}")
             }
         }
     }
