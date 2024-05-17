@@ -37,7 +37,7 @@ class MainScreenViewModel @Inject constructor(
                 articleList.clear()
                 articleList.addAll(it)
                 _mainScreenUiState.value = MainScreenUiState.Success(articleList)
-                Log.d(MainScreenViewModel::class.java.name, "Articles size ${it.size}")
+                Log.d(MainScreenViewModel::class.java.name, "Articles size ${articleList.size}")
             }
         }
     }

@@ -17,7 +17,7 @@ class ArticleRepositoryImpl @Inject constructor(
 
     override suspend fun fetchAndSave(): Result<List<Long>> {
         return try {
-            val articleEntitiesList = remoteDataSource.getArticles().toArticleEntities()
+            val articleEntitiesList = remoteDataSource.getArticles()
             Log.d("ArticleRepository", "Article amount ${articleEntitiesList.size}")
 
             articleEntitiesList.forEach {

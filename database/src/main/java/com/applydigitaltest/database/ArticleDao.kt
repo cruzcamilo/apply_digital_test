@@ -15,7 +15,7 @@ interface ArticleDao {
     suspend fun insertAll(entry: List<ArticleEntity>): List<Long>
 
     @Query("UPDATE ArticleEntity SET deleted = 1 WHERE id = :id")
-    fun deleteEntry(id: Long): Int
+    suspend fun deleteEntry(id: Long): Int
 
     @Query("DELETE FROM ArticleEntity WHERE deleted = 0")
     suspend fun deleteAllEntries()

@@ -1,7 +1,7 @@
 package com.applydigitaltest.data.datasource
 
-import com.applydigitaltest.network.response.NetworkArticles
+import com.applydigitaltest.database.ArticleEntity
 
 interface RemoteDataSource {
-    suspend fun getArticles(): NetworkArticles
+    suspend fun getArticles(): List<ArticleEntity>
 }
