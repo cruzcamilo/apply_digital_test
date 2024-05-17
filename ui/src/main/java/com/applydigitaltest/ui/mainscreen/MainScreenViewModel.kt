@@ -9,6 +9,7 @@ import com.applydigitaltest.domain.usecase.GetArticlesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,8 +20,6 @@ class MainScreenViewModel @Inject constructor(
     private val fetchAndSaveUseCase: FetchAndSaveUseCase,
     private val deleteArticleUseCase: DeleteArticleUseCase,
 ): ViewModel() {
-    private val articleList = mutableListOf<Article>()
-
     private val _mainScreenUiState = MutableStateFlow<MainScreenUiState>(MainScreenUiState.Loading)
     val mainScreenUiState : StateFlow<MainScreenUiState> get() = _mainScreenUiState
 
@@ -32,11 +31,11 @@ class MainScreenViewModel @Inject constructor(
         viewModelScope.launch {
             _mainScreenUiState.value = MainScreenUiState.Loading
             fetchAndSaveUseCase.invoke()
-            getArticlesUseCase.invoke().collect {
-                articleList.clear()
-                articleList.addAll(it)
-                _mainScreenUiState.value = MainScreenUiState.Success(articleList)
-            }
+            getArticlesUseCase.invoke()
+                .distinctUntilChanged()
+                .collect {
+                    _mainScreenUiState.value = MainScreenUiState.Success(it)
+                }
         }
     }
 
