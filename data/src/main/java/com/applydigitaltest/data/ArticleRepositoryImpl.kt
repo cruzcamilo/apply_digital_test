@@ -13,7 +13,8 @@ class ArticleRepositoryImpl @Inject constructor(
     private val localDataSource: LocalDataSource,
 ) : ArticleRepository {
 
-    override suspend fun getArticles(): Flow<List<Article>> = localDataSource.getArticles()
+    override fun getArticles(): Flow<List<Article>> = localDataSource.getArticles()
+
     override suspend fun fetchAndSave(): Result<List<Long>> {
         return try {
             val articleEntitiesList = remoteDataSource.getArticles().toArticleEntities()

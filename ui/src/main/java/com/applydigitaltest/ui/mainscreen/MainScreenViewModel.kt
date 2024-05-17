@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.applydigitaltest.domain.model.Article
+import com.applydigitaltest.domain.usecase.DeleteArticleUseCase
 import com.applydigitaltest.domain.usecase.FetchAndSaveUseCase
 import com.applydigitaltest.domain.usecase.GetArticlesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
     private val getArticlesUseCase: GetArticlesUseCase,
-    private val fetchAndSaveUseCase: FetchAndSaveUseCase
+    private val fetchAndSaveUseCase: FetchAndSaveUseCase,
+    private val deleteArticleUseCase: DeleteArticleUseCase,
 ): ViewModel() {
     private val articleList = mutableListOf<Article>()
 
@@ -32,6 +34,7 @@ class MainScreenViewModel @Inject constructor(
             _mainScreenUiState.value = MainScreenUiState.Loading
             fetchAndSaveUseCase.invoke()
             getArticlesUseCase.invoke().collect {
+                articleList.clear()
                 articleList.addAll(it)
                 _mainScreenUiState.value = MainScreenUiState.Success(articleList)
                 Log.d(MainScreenViewModel::class.java.name, "Articles size ${it.size}")
@@ -44,6 +47,9 @@ class MainScreenViewModel @Inject constructor(
             val mutableList = (it as MainScreenUiState.Success).articles.toMutableList()
             mutableList.remove(currentItem)
             MainScreenUiState.Success(mutableList)
+        }
+        viewModelScope.launch {
+            deleteArticleUseCase.invoke(currentItem)
         }
     }
 }

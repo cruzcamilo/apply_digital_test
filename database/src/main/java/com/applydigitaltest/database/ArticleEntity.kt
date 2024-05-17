@@ -15,5 +15,5 @@ data class ArticleEntity(
     @ColumnInfo(name = "created_at_i")
     val createdAtI: Long,
     val url: String,
-    var deleted : Boolean = false
+    var deleted : Int = 0
 )

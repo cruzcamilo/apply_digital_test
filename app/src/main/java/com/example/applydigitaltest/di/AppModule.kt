@@ -9,6 +9,7 @@ import com.applydigitaltest.data.datasource.RemoteDataSource
 import com.applydigitaltest.data.datasource.RemoteDataSourceImpl
 import com.applydigitaltest.database.ArticleDao
 import com.applydigitaltest.domain.repository.ArticleRepository
+import com.applydigitaltest.domain.usecase.DeleteArticleUseCase
 import com.applydigitaltest.domain.usecase.FetchAndSaveUseCase
 import com.applydigitaltest.domain.usecase.GetArticlesUseCase
 import com.applydigitaltest.network.RetrofitProvider
@@ -24,6 +25,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    fun provideDeleteArticleUseCase(articleRepository: ArticleRepository): DeleteArticleUseCase =
+        DeleteArticleUseCase(articleRepository)
+
     @Provides
     fun provideGetArticlesUseCase(articleRepository: ArticleRepository): GetArticlesUseCase =
         GetArticlesUseCase(articleRepository)
@@ -31,6 +37,7 @@ object AppModule {
     @Provides
     fun provideFetchAndSaveUseCase(articleRepository: ArticleRepository): FetchAndSaveUseCase =
         FetchAndSaveUseCase(articleRepository)
+
     @Singleton
     @Provides
     fun provideArticleRepository(
@@ -52,7 +59,7 @@ object AppModule {
         articleDao: ArticleDao,
         ioDispatcher: CoroutineDispatcher
     ): LocalDataSource =
-        LocalDataSourceImpl(articleDao)
+        LocalDataSourceImpl(articleDao , ioDispatcher)
 
     @Singleton
     @Provides
